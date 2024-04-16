@@ -3,11 +3,10 @@ import Countdown from 'react-countdown';
 import styles from './hero.module.css'
 import BG from '../../../assets/BGVideo.webm'
 import Title from '../../../assets/Title.webp'
-import Form from '../../../components/Form/form'
 
-export default function heroSection() {
+export default function heroSection({setSetPopup}) {
 
-    const [setPopup, setSetPopup] = useState(false);
+    
 
     const renderer = ({ days, hours, minutes, seconds }) => {
         return (
@@ -35,8 +34,6 @@ export default function heroSection() {
                     <img className={styles.heroTitle} src={Title} alt="" />
                     <button onClick={() => { setSetPopup(prevState => !prevState) }}>Buy Ticket</button>
                 </span>
-
-                {setPopup ? <Form /> : null}
 
 
                 <div className={styles.date_time}>

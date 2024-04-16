@@ -1,11 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
-import styles from './navbar.module.css';
-import logo from '../../assets/Logo.webp';
-import Form from '../Form/form';
+import React, { useRef, useEffect, useState } from "react";
+import styles from "./navbar.module.css";
+import logo from "../../assets/Logo.webp";
 
-export default function Navbar() {
-
-    const [setPopup, setSetPopup] = useState(false);
+export default function Navbar({ handleFormClick }) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -15,10 +12,10 @@ export default function Navbar() {
             setIsScrolled(scrolled);
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener("scroll", handleScroll);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
@@ -28,45 +25,67 @@ export default function Navbar() {
 
     return (
         <nav className={styles.nav}>
-
-            <div className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isMobileMenuOpen ? styles.open : ''}`}>
-
-                <div className={`${styles.menuIcon} ${isMobileMenuOpen ? styles.open : ''}`} onClick={handleMobileMenuToggle}>
+            <div
+                className={`${styles.navbar} ${
+                    isScrolled ? styles.scrolled : ""
+                } ${isMobileMenuOpen ? styles.open : ""}`}
+            >
+                <div
+                    className={`${styles.menuIcon} ${
+                        isMobileMenuOpen ? styles.open : ""
+                    }`}
+                    onClick={handleMobileMenuToggle}
+                >
                     <div className={styles.bar} />
                     <div className={styles.bar} />
                     <div className={styles.bar} />
                 </div>
 
                 <a href="/">
-                    <img className={styles.logo} src={logo} alt='gsfk-logo' />
+                    <img className={styles.logo} src={logo} alt="gsfk-logo" />
                 </a>
 
-                <div className={`${styles.links} ${isMobileMenuOpen ? styles.open : ''}`}>
+                <div
+                    className={`${styles.links} ${
+                        isMobileMenuOpen ? styles.open : ""
+                    }`}
+                >
                     <a href="/">
-                        <img className={styles.logoo} src={logo} alt='gsfk-logo' />
+                        <img
+                            className={styles.logoo}
+                            src={logo}
+                            alt="gsfk-logo"
+                        />
                     </a>
 
                     <div className={styles.linkBlocks}>
-                        <a href={window.location.pathname === '/team' ? '/#about' : '#about'}>
+                        <a
+                            href={
+                                window.location.pathname === "/team"
+                                    ? "/#about"
+                                    : "#about"
+                            }
+                        >
                             About
                         </a>
-                        <a href="#join" >
-                            Partners
-                        </a>
-                        <a href="/team" >
-                            Team
-                        </a>
-                        <a href="/" className={styles.menuBuy} onClick={() => { setSetPopup(prevState => !prevState) }}>
+                        <a href="#join">Partners</a>
+                        <a href="/team">Team</a>
+                        <p
+                            className={styles.menuBuy}
+                            onClick={handleFormClick}
+                        >
                             Buy Ticket
-                        </a>
+                        </p>
                     </div>
 
-                    <a href="/" className={styles.buy} onClick={() => { setSetPopup(prevState => !prevState) }}>
+                    <p
+                        className={styles.buy}
+                        onClick={handleFormClick}
+                    >
                         <b>Buy Ticket</b>
-                    </a>
+                    </p>
                 </div>
             </div>
-            {setPopup ? <Form /> : null}
-        </nav >
+        </nav>
     );
 }

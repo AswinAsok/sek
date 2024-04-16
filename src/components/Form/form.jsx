@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './form.module.css';
 
-export default function Form() {
+export default function Form({handleFormClick}) {
     const formRef = useRef(null);
     const [formVisible, setFormVisible] = useState(true);
 
@@ -9,6 +9,7 @@ export default function Form() {
         function handleClickOutside(event) {
             if (formRef.current && !formRef.current.contains(event.target)) {
                 setFormVisible(false);
+                handleFormClick();
             }
         }
 
